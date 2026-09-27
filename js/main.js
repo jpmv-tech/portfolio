@@ -327,12 +327,31 @@ document.querySelectorAll('[data-nav]').forEach(a => a.addEventListener('click',
 }));
 
 // ─── Copy email ───────────────────────────────────────────────────────────
+const EMAIL = 'velasco.johnmarkm@gmail.com';
+const copyText = () => { try { navigator.clipboard && navigator.clipboard.writeText(EMAIL).catch(() => {}); } catch (e) {} };
 const copyBtn = document.getElementById('copy-email');
 let copyTimer;
 copyBtn.addEventListener('click', () => {
-  try { navigator.clipboard && navigator.clipboard.writeText('velasco.johnmarkm@gmail.com'); } catch (e) {}
+  copyText();
   copyBtn.textContent = 'Copied';
   clearTimeout(copyTimer);
   copyTimer = setTimeout(() => { copyBtn.textContent = 'Copy email'; }, 2000);
+});
+
+// ─── Email fallback ───────────────────────────────────────────────────────
+// mailto: does nothing when the visitor has no default mail app (common with
+// webmail). If the page keeps focus after the click, offer webmail links instead.
+const emailCta = document.getElementById('email-cta');
+const fallback = document.getElementById('email-fallback');
+emailCta.addEventListener('click', () => {
+  let left = false;
+  const onLeave = () => { left = true; };
+  window.addEventListener('blur', onLeave, {once:true});
+  document.addEventListener('visibilitychange', onLeave, {once:true});
+  setTimeout(() => {
+    window.removeEventListener('blur', onLeave);
+    document.removeEventListener('visibilitychange', onLeave);
+    if (!left) { copyText(); fallback.hidden = false; }
+  }, 1200);
 });
 })();

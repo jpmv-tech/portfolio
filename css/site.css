@@ -185,5 +185,11 @@ a.btn-secondary, a.btn-secondary:hover { color: var(--color-text); }
 .copy-btn:hover { background: color-mix(in srgb, var(--color-bg) 15%, transparent); }
 .email-cta { margin-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; background: var(--color-bg); color: var(--color-text); text-decoration: none; font-weight: 800; font-size: 16px; min-height: 52px; }
 .email-cta:hover { background: var(--color-accent-100); color: var(--color-text); }
+.email-fallback { margin-top: 16px; font-size: 14px; }
+.email-fallback[hidden] { display: none; }
+.email-fallback p { margin: 0 0 10px; }
+.email-fallback-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.email-fallback-links a, .email-fallback-links a:hover { color: var(--color-bg); border: 1px solid var(--color-bg); padding: 8px 14px; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; text-decoration: none; }
+.email-fallback-links a:hover { background: color-mix(in srgb, var(--color-bg) 15%, transparent); }
 
 .site-footer { padding-top: 24px; padding-bottom: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--color-neutral-700); }
